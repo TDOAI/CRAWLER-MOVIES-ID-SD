@@ -29,7 +29,7 @@ async function pagination() {
         const $ = cheerio.load(pageHTML.data);
         const last = $("#main-wrapper > div > section > div:nth-child(5) > nav > ul > li:nth-child(5) > a");
         const last_page = $(last).attr("href");
-        const pages_count = last_page.substring(74);
+        const pages_count = last_page.substring(last_page.lastIndexOf('=') + 1);
         const page_count = parseInt(pages_count);
         const pages = [];
         for (let index = 1; index <= page_count; index = index + 1) {
