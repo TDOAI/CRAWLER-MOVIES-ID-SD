@@ -121,6 +121,9 @@ async function insertCardsInMongoDb(tmdb) {
 
 async function main() {
     try {
+        const date = new Date();
+        const time = date.toUTCString();
+        console.log(time);
         await mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }, function(){
             console.log("CONNECTED TO MONGODB");
           });
