@@ -1,0 +1,28 @@
+
+name: MOVIES-SD
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+env:
+  MONGODB: ${{ secrets.MONGODB }}
+  URL: ${{ secrets.URL }}
+  DOMAIN: ${{ secrets.DOMAIN }}
+  AUTHORITY: ${{ secrets.AUTHORITY }}
+  REFERER: ${{ secrets.REFERER }}
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  CRAWL-MOVIES-SD:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.16'
+      - run: yarn
+      - name: Run script
+        run: yarn start
+      - uses: gautamkrishnar/keepalive-workflow@v1
