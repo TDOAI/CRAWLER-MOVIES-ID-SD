@@ -18,6 +18,11 @@ const config_0 = {
         'upgrade-insecure-requests': '1',
         'user-agent': ''
     },
+    timeout: 5000,
+    maxRedirects: 0,
+    validateStatus: function (status) {
+        return status = 404 || status == 301;
+    }
 };
 
 const config_with_proxy = {
@@ -37,6 +42,11 @@ const config_with_proxy = {
         'sec-fetch-site': 'same-origin',
         'upgrade-insecure-requests': '1',
         'user-agent': ''
+    },
+    timeout: 5000,
+    maxRedirects: 0,
+    validateStatus: function (status) {
+        return status = 404 || status == 301;
     },
     proxy: false,
     httpsAgent: new HttpsProxyAgent.HttpsProxyAgent(`http://<USERNAME>-rotate:<password>@p.webshare.io:80`)
