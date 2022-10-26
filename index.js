@@ -42,9 +42,9 @@ async function pagination() {
             const page_url = `${url}` + index;
             pages.push(page_url);
         }
-        const sliced = pages.slice(3, 5);
+        // const sliced = pages.slice(3, 5);
         console.log("PAGINATION DONE");
-        return sliced;
+        return pages;
     }
     catch (error) {
         console.log(error);
@@ -155,8 +155,9 @@ async function insertLinkWithError() {
     try {
         const cards = [];
         const promises = (backup || []).map(async card => {
-        const cardsFromDb = await Manual_Entry.findOne({ Link: card.Link });
-        if (!cardsFromDb) {
+        const cardsFromDbManual = await Manual_Entry.findOne({ Link: card.Link });
+        const cardsFromDb = await Movie.findOne({ stream_id: card.substring(n) });
+        if (!cardsFromDb && !cardsFromDbManual) {
             const newCard = new Manual_Entry(card);
             cards.push(card);
             // console.log(card);
